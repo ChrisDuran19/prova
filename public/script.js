@@ -3,8 +3,8 @@
 // Habla directamente con el ESP32 (vía Wokwi IoT Gateway) en localhost:9080
 // ============================================================================
 
-// Si el gateway privado de Wokwi usa otro puerto, cambialo acá:
-const ESP32_BASE = 'http://localhost:9080';
+// Mismo origen que la página (Render sirve la web y la API) — sin URL absoluta
+const ESP32_BASE = '';
 
 let ledOn = false;
 let brightness = 0;
