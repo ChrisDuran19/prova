@@ -3,109 +3,77 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Control de 1 LED - Interfaz Web Simple">
-  <meta name="theme-color" content="#667eea">
-  <title>💡 Control de LED</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75'>💡</text></svg>">
+  <title>Control de LED - ESP32</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Header -->
+
   <header class="header">
     <div class="header-container">
       <div class="header-left">
-        <h1 class="title">
-          <span class="title-icon">💡</span>
-          Control de LED
-        </h1>
-        <p class="subtitle">Dashboard Simple - Interfaz Web</p>
+        <h1 class="title"><span class="title-icon">🔴</span> Control de LED - ESP32</h1>
+        <p class="subtitle">Conectado vía WiFi al dispositivo simulado en Wokwi</p>
       </div>
       <div class="header-right">
-        <div class="status-indicator active" id="statusIndicator">
-          <span class="status-dot"></span>
-          <span class="status-text">En línea</span>
-        </div>
-        <div class="connection-info" id="connectionInfo">
-          <span class="label">Servidor:</span>
-          <span class="value">Conectado ✓</span>
+        <div class="status-indicator" id="statusIndicator">
+          <span class="status-dot offline"></span>
+          <span class="status-text">Conectando...</span>
         </div>
       </div>
     </div>
   </header>
 
-  <!-- Main Container -->
   <main class="main-container">
     <div class="container">
-      
-      <!-- LED Control -->
+
       <section class="led-section">
-        <h2 class="section-title">⚡ Control del LED</h2>
-        <div class="led-container" id="ledContainer">
+        <h2 class="section-title">💡 LED</h2>
+        <div class="led-container">
           <div class="led-control">
-            <button class="led-button" id="ledButton" onclick="toggleLed()">
-              <span class="led-icon">💡</span>
-            </button>
-            <label class="led-label" id="ledLabel">LED: OFF</label>
-            <input type="range" class="brightness-slider" id="brightnessSlider" 
-                   min="0" max="100" value="0" onchange="setBrightness(this.value)">
+            <button class="led-button red" id="ledButton" title="Click para toggle"></button>
+            <label class="led-label">LED Principal</label>
+            <input
+              type="range"
+              class="brightness-slider"
+              id="brightnessSlider"
+              min="0"
+              max="255"
+              value="0"
+              title="Arrastra para ajustar brillo"
+            >
             <span class="brightness-value" id="brightnessValue">0%</span>
           </div>
         </div>
       </section>
 
-      <!-- Controls Section -->
       <section class="controls-section">
+        <h2 class="section-title">🎛️ Controles</h2>
         <div class="controls-grid">
-          
-          <!-- Control General -->
           <div class="control-card">
-            <h3 class="control-title">🎛️ Control</h3>
+            <h3 class="control-title">Control Rápido</h3>
             <div class="button-group">
-              <button class="btn btn-success btn-large" onclick="turnLedOn()">
-                <span class="btn-icon">✓</span>
-                Encender
-              </button>
-              <button class="btn btn-danger btn-large" onclick="turnLedOff()">
-                <span class="btn-icon">✗</span>
-                Apagar
-              </button>
+              <button class="btn btn-success btn-large" id="btnOn">Encender</button>
+              <button class="btn btn-danger btn-large" id="btnOff">Apagar</button>
             </div>
           </div>
-
-          <!-- Secuencias -->
-          <div class="control-card">
-            <h3 class="control-title">🎬 Efectos</h3>
-            <div class="sequences-grid">
-              <button class="btn btn-sequence" onclick="playSequence('pulse')">
-                <span class="seq-icon">🔴</span>
-                <span class="seq-name">Parpadeo</span>
-              </button>
-              <button class="btn btn-sequence" onclick="playSequence('fade')">
-                <span class="seq-icon">✨</span>
-                <span class="seq-name">Fade</span>
-              </button>
-            </div>
-          </div>
-
         </div>
       </section>
 
-      <!-- Status Section -->
       <section class="status-section">
-        <h2 class="section-title">📊 Estado</h2>
+        <h2 class="section-title">📊 Estado Actual</h2>
         <div class="status-card">
           <div class="status-led-name">
-            <span class="status-led-emoji">💡</span>
-            LED Principal
+            <span class="status-led-emoji">🔴</span>
+            <span>LED Principal</span>
           </div>
           <div class="status-values">
             <div>
               <span class="status-value-label">Estado:</span>
-              <span class="status-value" id="statusState">OFF</span>
+              <span class="status-value" id="statusStateValue">🔴 OFF</span>
             </div>
             <div>
               <span class="status-value-label">Brillo:</span>
-              <span class="status-value" id="statusBrightness">0%</span>
+              <span class="status-value" id="statusBrightnessValue">0%</span>
             </div>
           </div>
         </div>
@@ -114,18 +82,15 @@
     </div>
   </main>
 
-  <!-- Loading Overlay -->
   <div class="loading-overlay" id="loadingOverlay">
     <div class="loader">
       <div class="spinner"></div>
-      <p>Cargando...</p>
+      <p>Enviando comando...</p>
     </div>
   </div>
 
-  <!-- Toast Notifications -->
-  <div id="toastContainer" class="toast-container"></div>
+  <div class="toast-container" id="toastContainer"></div>
 
-  <!-- Scripts -->
   <script src="script.js"></script>
 </body>
 </html>
