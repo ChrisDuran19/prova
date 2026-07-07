@@ -79,7 +79,7 @@ body {
 }
 
 .header-container {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -177,7 +177,7 @@ body {
 }
 
 .container {
-  max-width: 1400px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
@@ -204,48 +204,30 @@ body {
 }
 
 /* ============================================================================
-   LEDS SECTION
+   LED SECTION
    ============================================================================ */
 
-.leds-section {
+.led-section {
   margin-bottom: 3rem;
   animation: fadeIn 0.8s ease-out 0.2s both;
 }
 
-.leds-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1.5rem;
+.led-container {
+  display: flex;
+  justify-content: center;
 }
 
 .led-control {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  animation: slideUp 0.6s ease-out both;
-}
-
-.led-control:nth-child(1) { animation-delay: 0.1s; }
-.led-control:nth-child(2) { animation-delay: 0.2s; }
-.led-control:nth-child(3) { animation-delay: 0.3s; }
-.led-control:nth-child(4) { animation-delay: 0.4s; }
-.led-control:nth-child(5) { animation-delay: 0.5s; }
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  gap: 1.5rem;
+  animation: slideUp 0.6s ease-out;
 }
 
 .led-button {
-  width: 120px;
-  height: 120px;
+  width: 160px;
+  height: 160px;
   border: 4px solid rgba(255, 255, 255, 0.3);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
@@ -253,23 +235,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem;
+  font-size: 4rem;
   transition: var(--transition);
   position: relative;
   overflow: hidden;
   backdrop-filter: blur(10px);
-}
-
-.led-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: inherit;
-  border-radius: 50%;
-  z-index: -1;
 }
 
 .led-button:hover {
@@ -283,45 +253,32 @@ body {
   transform: scale(0.95);
 }
 
-/* LED States */
 .led-button.active {
-  border-color: currentColor;
+  border-color: #fbbf24;
   animation: ledGlow 1.5s ease-in-out infinite;
+  background: rgba(251, 191, 36, 0.2);
 }
 
 @keyframes ledGlow {
   0%, 100% {
-    box-shadow: 0 0 20px currentColor, inset 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 20px #fbbf24, inset 0 0 10px rgba(0, 0, 0, 0.2);
   }
   50% {
-    box-shadow: 0 0 40px currentColor, inset 0 0 20px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 40px #fbbf24, inset 0 0 20px rgba(0, 0, 0, 0.3);
   }
 }
-
-.led-button.led1 { color: #ef4444; }
-.led-button.led2 { color: #f97316; }
-.led-button.led3 { color: #eab308; }
-.led-button.led4 { color: #22c55e; }
-.led-button.led5 { color: #3b82f6; }
-
-.led-button.active.led1 { background: rgba(239, 68, 68, 0.2); }
-.led-button.active.led2 { background: rgba(249, 115, 22, 0.2); }
-.led-button.active.led3 { background: rgba(234, 179, 8, 0.2); }
-.led-button.active.led4 { background: rgba(34, 197, 94, 0.2); }
-.led-button.active.led5 { background: rgba(59, 130, 246, 0.2); }
 
 .led-label {
   font-weight: 600;
   color: white;
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   text-align: center;
 }
 
 .brightness-slider {
-  width: 100%;
-  max-width: 120px;
-  height: 6px;
-  border-radius: 3px;
+  width: 200px;
+  height: 8px;
+  border-radius: 4px;
   background: rgba(255, 255, 255, 0.2);
   outline: none;
   -webkit-appearance: none;
@@ -333,8 +290,8 @@ body {
 .brightness-slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: white;
   cursor: pointer;
@@ -348,8 +305,8 @@ body {
 }
 
 .brightness-slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: white;
   cursor: pointer;
@@ -361,6 +318,12 @@ body {
 .brightness-slider::-moz-range-thumb:hover {
   transform: scale(1.2);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.brightness-value {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
 }
 
 /* ============================================================================
@@ -389,7 +352,6 @@ body {
 
 .control-card:nth-child(1) { animation-delay: 0.2s; }
 .control-card:nth-child(2) { animation-delay: 0.3s; }
-.control-card:nth-child(3) { animation-delay: 0.4s; }
 
 .control-card:hover {
   transform: translateY(-8px);
@@ -481,7 +443,7 @@ body {
 /* Sequences */
 .sequences-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   gap: 1rem;
 }
 
@@ -506,61 +468,7 @@ body {
 
 .seq-name {
   font-weight: 700;
-}
-
-.seq-desc {
-  font-size: 0.8rem;
-  opacity: 0.7;
-}
-
-/* Auto Mode */
-.auto-mode-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.toggle-switch {
-  position: relative;
-  width: 60px;
-  height: 34px;
-  background: var(--gray-300);
-  border-radius: 17px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.toggle-switch.active {
-  background: var(--success);
-}
-
-.toggle-slider {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 30px;
-  height: 30px;
-  background: white;
-  border-radius: 50%;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.toggle-switch.active .toggle-slider {
-  transform: translateX(26px);
-}
-
-.toggle-label {
-  font-weight: 600;
-  color: var(--gray-700);
-  font-size: 1rem;
-}
-
-.toggle-desc {
-  font-size: 0.85rem;
-  color: var(--gray-500);
-  text-align: center;
+  margin-top: 0.5rem;
 }
 
 /* ============================================================================
@@ -571,51 +479,57 @@ body {
   animation: fadeIn 0.8s ease-out 0.6s both;
 }
 
-.status-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
 .status-card {
   background: white;
   border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
+  padding: 2rem;
+  box-shadow: var(--shadow-lg);
   transition: var(--transition);
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .status-card:hover {
   box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
 }
 
 .status-led-name {
   font-weight: 700;
   color: var(--gray-900);
-  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  font-size: 1.2rem;
 }
 
 .status-led-emoji {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 .status-values {
   display: flex;
-  justify-content: space-between;
-  font-size: 0.9rem;
-  color: var(--gray-600);
+  justify-content: space-around;
+  gap: 2rem;
+}
+
+.status-values > div {
+  text-align: center;
 }
 
 .status-value-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--gray-600);
+  margin-bottom: 0.5rem;
   opacity: 0.7;
 }
 
 .status-value {
-  font-weight: 600;
-  color: var(--gray-900);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary);
 }
 
 /* ============================================================================
@@ -716,16 +630,6 @@ body {
   color: var(--danger);
 }
 
-.toast.info {
-  border-left: 4px solid var(--info);
-  color: var(--info);
-}
-
-.toast.warning {
-  border-left: 4px solid var(--warning);
-  color: var(--warning);
-}
-
 /* ============================================================================
    ANIMACIONES ADICIONALES
    ============================================================================ */
@@ -768,15 +672,14 @@ body {
     padding: 1.5rem 0.5rem;
   }
 
-  .leds-grid {
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 1rem;
+  .led-button {
+    width: 120px;
+    height: 120px;
+    font-size: 3rem;
   }
 
-  .led-button {
-    width: 100px;
-    height: 100px;
-    font-size: 2.5rem;
+  .brightness-slider {
+    width: 150px;
   }
 
   .controls-grid {
@@ -807,19 +710,15 @@ body {
     font-size: 1.25rem;
   }
 
-  .leds-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .led-button {
-    width: 80px;
-    height: 80px;
-    font-size: 2rem;
+    width: 100px;
+    height: 100px;
+    font-size: 2.5rem;
     border-width: 3px;
   }
 
   .led-label {
-    font-size: 0.8rem;
+    font-size: 1rem;
   }
 
   .button-group {
@@ -833,44 +732,8 @@ body {
   .control-card {
     padding: 1rem;
   }
-}
 
-/* ============================================================================
-   DARK MODE (Preparado para futuro)
-   ============================================================================ */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --gray-50: #0f1419;
-    --gray-100: #1a202c;
-    --gray-900: #f0f0f0;
-    --shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
-  }
-
-  .control-card {
-    background: var(--gray-100);
-    color: white;
-  }
-
-  .control-title,
-  .status-led-name {
-    color: white;
-  }
-
-  .btn-sequence {
-    background: linear-gradient(135deg, var(--gray-100) 0%, var(--gray-50) 100%);
-    color: white;
-  }
-}
-
-/* ============================================================================
-   PRINT STYLES
-   ============================================================================ */
-
-@media print {
-  .header,
-  .controls-section {
-    display: none;
+  .brightness-slider {
+    width: 120px;
   }
 }
