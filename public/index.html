@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Control de 5 LEDs - Interfaz Web Premium">
+  <meta name="description" content="Control de 1 LED - Interfaz Web Simple">
   <meta name="theme-color" content="#667eea">
-  <title>💡 Control de LEDs - Dashboard Premium</title>
+  <title>💡 Control de LED</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='75' font-size='75'>💡</text></svg>">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -16,9 +16,9 @@
       <div class="header-left">
         <h1 class="title">
           <span class="title-icon">💡</span>
-          Control de LEDs
+          Control de LED
         </h1>
-        <p class="subtitle">Dashboard Premium - Interfaz Web</p>
+        <p class="subtitle">Dashboard Simple - Interfaz Web</p>
       </div>
       <div class="header-right">
         <div class="status-indicator active" id="statusIndicator">
@@ -37,10 +37,20 @@
   <main class="main-container">
     <div class="container">
       
-      <!-- LEDs Grid -->
-      <section class="leds-section">
-        <h2 class="section-title">⚡ LEDs Controlables</h2>
-        <div class="leds-grid" id="ledsGrid"></div>
+      <!-- LED Control -->
+      <section class="led-section">
+        <h2 class="section-title">⚡ Control del LED</h2>
+        <div class="led-container" id="ledContainer">
+          <div class="led-control">
+            <button class="led-button" id="ledButton" onclick="toggleLed()">
+              <span class="led-icon">💡</span>
+            </button>
+            <label class="led-label" id="ledLabel">LED: OFF</label>
+            <input type="range" class="brightness-slider" id="brightnessSlider" 
+                   min="0" max="100" value="0" onchange="setBrightness(this.value)">
+            <span class="brightness-value" id="brightnessValue">0%</span>
+          </div>
+        </div>
       </section>
 
       <!-- Controls Section -->
@@ -49,50 +59,31 @@
           
           <!-- Control General -->
           <div class="control-card">
-            <h3 class="control-title">🎛️ Control General</h3>
+            <h3 class="control-title">🎛️ Control</h3>
             <div class="button-group">
-              <button class="btn btn-success btn-large" onclick="toggleAllLeds('on')">
+              <button class="btn btn-success btn-large" onclick="turnLedOn()">
                 <span class="btn-icon">✓</span>
-                Todos ON
+                Encender
               </button>
-              <button class="btn btn-danger btn-large" onclick="toggleAllLeds('off')">
+              <button class="btn btn-danger btn-large" onclick="turnLedOff()">
                 <span class="btn-icon">✗</span>
-                Todos OFF
+                Apagar
               </button>
             </div>
           </div>
 
           <!-- Secuencias -->
           <div class="control-card">
-            <h3 class="control-title">🎬 Secuencias</h3>
+            <h3 class="control-title">🎬 Efectos</h3>
             <div class="sequences-grid">
-              <button class="btn btn-sequence" onclick="playSequence('pulse)">
+              <button class="btn btn-sequence" onclick="playSequence('pulse')">
                 <span class="seq-icon">🔴</span>
-                <span class="seq-name">Pulse</span>
-                <span class="seq-desc">Parpadeo</span>
+                <span class="seq-name">Parpadeo</span>
               </button>
-              <button class="btn btn-sequence" onclick="playSequence('wave')">
-                <span class="seq-icon">〰️</span>
-                <span class="seq-name">Wave</span>
-                <span class="seq-desc">Onda</span>
+              <button class="btn btn-sequence" onclick="playSequence('fade')">
+                <span class="seq-icon">✨</span>
+                <span class="seq-name">Fade</span>
               </button>
-              <button class="btn btn-sequence" onclick="playSequence('rainbow')">
-                <span class="seq-icon">🌈</span>
-                <span class="seq-name">Rainbow</span>
-                <span class="seq-desc">Arco iris</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Modo Automático -->
-          <div class="control-card">
-            <h3 class="control-title">⚙️ Modo Automático</h3>
-            <div class="auto-mode-container">
-              <div class="toggle-switch" id="autoModeToggle" onclick="toggleAutoMode()">
-                <div class="toggle-slider"></div>
-              </div>
-              <span class="toggle-label" id="autoModeLabel">Desactivado</span>
-              <p class="toggle-desc">Ejecuta secuencias automáticamente</p>
             </div>
           </div>
 
@@ -101,8 +92,23 @@
 
       <!-- Status Section -->
       <section class="status-section">
-        <h2 class="section-title">📊 Estado en Tiempo Real</h2>
-        <div class="status-grid" id="statusGrid"></div>
+        <h2 class="section-title">📊 Estado</h2>
+        <div class="status-card">
+          <div class="status-led-name">
+            <span class="status-led-emoji">💡</span>
+            LED Principal
+          </div>
+          <div class="status-values">
+            <div>
+              <span class="status-value-label">Estado:</span>
+              <span class="status-value" id="statusState">OFF</span>
+            </div>
+            <div>
+              <span class="status-value-label">Brillo:</span>
+              <span class="status-value" id="statusBrightness">0%</span>
+            </div>
+          </div>
+        </div>
       </section>
 
     </div>
